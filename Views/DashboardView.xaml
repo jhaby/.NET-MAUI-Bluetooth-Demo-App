@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAsthmaAssistane.Views.DashboardView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:model="clr-namespace:SmartAsthmaAssistane.Models"
+    xmlns:vm="clr-namespace:SmartAsthmaAssistane.ViewModels"
+    Title="DashboardView"
+    x:DataType="vm:DashboardViewModel"
+    Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Border
+                Stroke="Transparent"
+                StrokeShape="RoundRectangle 0 0 24 24"
+                StrokeThickness="0">
+                <Grid>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="FillAndExpand"
+                        Source="aichild.jpg" />
+                    <VerticalStackLayout Margin="24,32" VerticalOptions="End">
+                        <Label
+                            FontAttributes="Bold"
+                            FontSize="24"
+                            Text="Smart Asthma Assistant"
+                            TextColor="White"
+                            VerticalOptions="End" />
+                        <Label Margin="0,8" Text="{Binding User.Email, StringFormat='Hi, {0}'}" />
+                    </VerticalStackLayout>
+
+                </Grid>
+            </Border>
+            <Grid
+                Margin="16"
+                ColumnDefinitions="0.5*,0.5*"
+                RowDefinitions="auto,auto,auto,auto,auto,auto">
+                <Label
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Bold"
+                    Style="{x:StaticResource DarkLabel}"
+                    Text="Weather info" />
+                <Border
+                    Grid.Row="1"
+                    Margin="0,8,8,8"
+                    BackgroundColor="LightCoral"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 14">
+                    <Border.Shadow>
+                        <Shadow Brush="{x:StaticResource Gray200Brush}" Offset="0,0" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Padding="8">
+                        <lvc:PieChart
+                            Margin="12"
+                            HeightRequest="110"
+                            HorizontalOptions="CenterAndExpand"
+                            InitialRotation="-225"
+                            MaxAngle="270"
+                            MaxValue="100"
+                            MinValue="0"
+                            Series="{Binding TempSeries}"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="110" />
+                        <Label
+                            Margin="0,-10,0,8"
+                            Padding="0"
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            HorizontalOptions="Center"
+                            Style="{x:StaticResource DarkLabel}"
+                            Text="Temperature (&#176;C)"
+                            TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="8,8,0,8"
+                    BackgroundColor="LightSeaGreen"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 14">
+                    <Border.Shadow>
+                        <Shadow Brush="{x:StaticResource Gray200Brush}" Offset="0,0" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Padding="8">
+                        <lvc:PieChart
+                            Margin="12"
+                            HeightRequest="110"
+                            HorizontalOptions="CenterAndExpand"
+                            InitialRotation="-225"
+                            MaxAngle="270"
+                            MaxValue="108"
+                            MinValue="0"
+                            Series="{Binding HumiditySeries}"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="110" />
+                        <Label
+                            Margin="0,-10,0,0"
+                            FontAttributes="Bold"
+                            FontSize="17"
+                            HorizontalOptions="Center"
+                            Style="{x:StaticResource DarkLabel}"
+                            Text="Humidity (%)"
+                            TextColor="White" />
+                    </VerticalStackLayout>
+                </Border>
+                <Label
+                    Grid.Row="2"
+                    Margin="0,16,0,8"
+                    FontAttributes="Bold"
+                    Style="{x:StaticResource DarkLabel}"
+                    Text="Device connection" />
+                <Border
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Padding="8"
+                    BackgroundColor="White"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 10">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="{x:StaticResource Gray200Brush}"
+                            Radius="5"
+                            Offset="0,0" />
+                    </Border.Shadow>
+                    <VerticalStackLayout Padding="8">
+                        <!--<Label
+                            Margin="0,0,0,12"
+                            Style="{x:StaticResource DarkLabel}"
+                            Text="{Binding ConnectedDevice, StringFormat='Connected to {0}', TargetNullValue='No device connected', FallbackValue='No device connected'}" />-->
+                        <ActivityIndicator
+                            Margin="4"
+                            HorizontalOptions="Center"
+                            IsRunning="{Binding IsBusy}"
+                            IsVisible="{Binding IsBusy}" />
+                        <Button
+                            Command="{Binding LoadItemsCommand}"
+                            IsEnabled="{Binding IsBtnActive}"
+                            Text="Tap to connect" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Label
+                    Grid.Row="4"
+                    Margin="0,16,0,8"
+                    FontAttributes="Bold"
+                    Style="{x:StaticResource DarkLabel}"
+                    Text="Medication reminders" />
+                <Border
+                    Grid.Row="5"
+                    Grid.ColumnSpan="2"
+                    Padding="8"
+                    BackgroundColor="White"
+                    Stroke="Transparent"
+                    StrokeShape="RoundRectangle 10">
+                    <Border.Shadow>
+                        <Shadow
+                            Brush="{x:StaticResource Gray200Brush}"
+                            Radius="5"
+                            Offset="0,0" />
+                    </Border.Shadow>
+                    <CollectionView ItemsSource="{Binding Reminders}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="model:Reminder">
+                                <Grid
+                                    Margin="0,0,0,12"
+                                    ColumnDefinitions="0.2*,0.8*"
+                                    RowDefinitions="1*,1*,1*,auto">
+                                    <Image
+                                        Grid.RowSpan="3"
+                                        HeightRequest="40"
+                                        Source="tempsun.png" />
+                                    <Label
+                                        Grid.Column="1"
+                                        FontAttributes="Italic"
+                                        FontSize="10"
+                                        Style="{x:StaticResource DarkLabel}"
+                                        Text="{Binding RaisedOn, StringFormat='{0}', TargetNullValue='Mon 2 2024  3:30 PM'}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        Style="{x:StaticResource DarkLabel}"
+                                        Text="{Binding Name}" />
+                                    <Label
+                                        Grid.Row="2"
+                                        Grid.Column="1"
+                                        Padding="0,4"
+                                        FontAttributes="Italic"
+                                        Style="{x:StaticResource DarkLabel}"
+                                        Text="{Binding Description}"
+                                        TextColor="Teal" />
+                                    <BoxView
+                                        Grid.Row="4"
+                                        Grid.Column="1"
+                                        BackgroundColor="{x:StaticResource Gray200}"
+                                        HeightRequest="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <!--<VerticalStackLayout Padding="8" BindableLayout.ItemsSource="{Binding Reminders}">
+                        <BindableLayout.ItemTemplate>
+
+                        </BindableLayout.ItemTemplate>
+                    </VerticalStackLayout>-->
+                </Border>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

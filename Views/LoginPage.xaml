@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAsthmaAssistane.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+    xmlns:vm="clr-namespace:SmartAsthmaAssistane.ViewModels"
+    x:DataType="vm:LoginViewModel"
+    Shell.NavBarIsVisible="False">
+    <ScrollView>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Image
+                Aspect="AspectFill"
+                Source="loginbg.jpg"
+                VerticalOptions="FillAndExpand" />
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0.1" Color="Transparent" />
+                        <GradientStop Offset="0.75" Color="{x:StaticResource MidnightBlue}" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <VerticalStackLayout Margin="24" VerticalOptions="End">
+                    <Image Source="logonobg.png" WidthRequest="140" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Text="Smart Asthma Assistant" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Sign in" />
+                    <input:AdvancedEntry
+                        Margin="0,8"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        CornerRadius="8"
+                        Placeholder="Enter your email"
+                        PlaceholderColor="White"
+                        Text="{Binding Email}"
+                        TextColor="White" />
+                    <input:AdvancedEntry
+                        Margin="0,8,0,16"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        CornerRadius="8"
+                        IsPassword="True"
+                        Placeholder="Enter your password"
+                        PlaceholderColor="White"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        HorizontalOptions="End"
+                        Text="Forgot password?"
+                        TextColor="White" />
+                    <ActivityIndicator
+                        Margin="8"
+                        HorizontalOptions="Center"
+                        IsRunning="{Binding IsBusy}"
+                        IsVisible="{Binding IsBusy}" />
+                    <Button
+                        Margin="0,8"
+                        BackgroundColor="{x:StaticResource White}"
+                        Command="{Binding LoginCommand}"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Sign in"
+                        TextColor="{x:StaticResource Primary}" />
+                    <Button
+                        Margin="0,8"
+                        BackgroundColor="Transparent"
+                        BorderColor="{x:StaticResource White}"
+                        BorderWidth="2"
+                        Command="{Binding CreateAccountCommand}"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Create account"
+                        TextColor="{x:StaticResource White}" />
+
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAsthmaAssistane.Views.SignupPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:input="clr-namespace:InputKit.Shared.Controls;assembly=InputKit.Maui"
+    xmlns:vm="clr-namespace:SmartAsthmaAssistane.ViewModels"
+    Title="Sign up"
+    x:DataType="vm:SignupViewModel">
+    <ScrollView>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <Image
+                Aspect="AspectFill"
+                Source="loginbg.jpg"
+                VerticalOptions="FillAndExpand" />
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Offset="0.1" Color="Transparent" />
+                        <GradientStop Offset="0.75" Color="{x:StaticResource MidnightBlue}" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <VerticalStackLayout Margin="24" VerticalOptions="End">
+                    <Image Source="logonobg.png" WidthRequest="140" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        Text="Smart Asthma Assistant" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        FontSize="16"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Create account" />
+                    <input:AdvancedEntry
+                        Margin="0,8,0,8"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        CornerRadius="8"
+                        Placeholder="Enter your email"
+                        PlaceholderColor="White"
+                        Text="{Binding Email}"
+                        TextColor="White" />
+                    <input:AdvancedEntry
+                        Margin="0,8,0,8"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        CornerRadius="8"
+                        IsPassword="True"
+                        Placeholder="Create Password"
+                        PlaceholderColor="White"
+                        Text="{Binding Password}"
+                        TextColor="White" />
+                    <input:AdvancedEntry
+                        Margin="0,8,0,16"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        CornerRadius="8"
+                        IsPassword="True"
+                        Placeholder="Confirm Password"
+                        PlaceholderColor="White"
+                        Text="{Binding ConfirmPassword}"
+                        TextColor="White" />
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" />
+
+                    <Button
+                        Margin="0,8"
+                        BackgroundColor="White"
+                        Command="{Binding SignupCommand}"
+                        FontSize="16"
+                        HorizontalOptions="FillAndExpand"
+                        Text="Sign up"
+                        TextColor="{x:StaticResource Primary}" />
+                    <Label
+                        Margin="0,8"
+                        FontAttributes="Bold"
+                        HorizontalOptions="Center"
+                        Text="Go Back To Login">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding GoToLoginCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>

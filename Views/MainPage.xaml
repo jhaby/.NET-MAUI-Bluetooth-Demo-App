@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="SmartAsthmaAssistane.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:vm="clr-namespace:SmartAsthmaAssistane.ViewModels"
+    Padding="0"
+    x:DataType="vm:MainViewModel"
+    Shell.NavBarIsVisible="False">
+    <VerticalStackLayout>
+        <Border
+            Stroke="Transparent"
+            StrokeShape="RoundRectangle 20"
+            StrokeThickness="0">
+            <Grid />
+        </Border>
+        <lvc:PieChart
+            HeightRequest="160"
+            InitialRotation="-225"
+            MaxAngle="270"
+            MaxValue="100"
+            MinValue="0"
+            Series="{Binding TempSeries}"
+            WidthRequest="150" />
+    </VerticalStackLayout>
+</ContentPage>
