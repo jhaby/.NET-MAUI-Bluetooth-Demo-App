@@ -10,8 +10,8 @@ namespace SmartAsthmaAssistane.Services;
 public class FirebaseService
 {
     readonly FirebaseAuthClient authClient;
-    private readonly string apiKey = "AIzaSyApCMZNqwEMEYXnLvdIb_YFlDbAliI1ikg";
-    private readonly string domain = "smartasthmaassistant.firebaseapp.com";
+    private readonly string apiKey = "#FIREBASE_API_KEY#";
+    private readonly string domain = "#FIREBASE_APP_DOMAIN#";
     public FirebaseService()
     {
         var config = new FirebaseAuthConfig
